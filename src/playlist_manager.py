@@ -38,14 +38,13 @@ def print_message():
     print("\tsync = download playlist to mp3 file")
 
 
-if __name__ == '__main__':
+def main():
     if len(sys.argv) == 1:
         print_message()
         print("\nExiting program ...")
         quit()
 
     if sys.argv[1] == 'update':
-
         raw_playlist_data = google_sheet.get_json(SHEET_URL + API_KEY)
         playlist_data = google_sheet.check_file_downloaded(raw_playlist_data, DOWNLOAD_DIR)
         google_sheet.write_json_file(playlist_data)
@@ -57,4 +56,5 @@ if __name__ == '__main__':
     else:
         print_message()
 
-        
+if __name__ == '__main__':
+    main()
