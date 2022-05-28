@@ -1,11 +1,10 @@
 #!/usr/bin/python3
 import subprocess
-from sys import stdin
+from sys import stdout
 from mutagen.easyid3 import EasyID3
 
 def get_audio_track(url):
     """Get the audio track from youtube url"""
-    print("Getting audio track")
     get_audio_track = subprocess.run(['yt-dlp', '-g', url], stdout=subprocess.PIPE)
 
     ytdl_g_out = get_audio_track.stdout.decode('utf-8')
@@ -29,7 +28,9 @@ def download_audio_parts(audio_track, track_info, outdir):
         if not line:
             break
         if 'speed=' in line:
-            print(line)
+            print("\r\t" + line.strip(), end="")
+            #stdout.write("\t")
+            stdout.flush()
 
     if download_process.returncode == 0:
         print("Download saved in " + outfile)

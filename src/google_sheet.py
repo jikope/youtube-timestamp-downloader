@@ -26,7 +26,7 @@ def get_json(sheet_url):
         return data
     
 def check_file_downloaded(raw_playlist_data, playlist_dir):
-    """Function to check if track already downloaded"""
+    """Check if track already downloaded"""
     cmd = "ls " + playlist_dir
     out = subprocess.run(cmd.split(), stdout=subprocess.PIPE)
     downloaded_track_filename = out.stdout.decode().replace('.mp3', '').split('\n')
@@ -50,15 +50,12 @@ def check_file_downloaded(raw_playlist_data, playlist_dir):
     return playlist_data
 
 def write_json_file(playlist_dict):
+    "Save playlist as json file"
     json_export = json.dumps(playlist_dict, indent=4)
 
     with open("playlist.json", 'w') as outfile:
         outfile.write(json_export)
 
-def update(sheet_url, download_dir):
-    raw_playlist_data = get_json(sheet_url)
-    playlist_data = check_file_downloaded(raw_playlist_data, download_dir)
-    write_json_file(playlist_data)
 
 API_KEY = "?key=AIzaSyBKEJXqjIpOvhH-15cwli2UZZrj4inrj90"
 SHEET_URL = "https://sheets.googleapis.com/v4/spreadsheets/1R1IGG3ETEWHxhWxIuFCfkGwOZUy3W4syATL6RzQrURc/values/Sheet1"
@@ -68,4 +65,3 @@ if __name__ == "__main__":
     raw_playlist_data = get_json(SHEET_URL + API_KEY)
     playlist_data = check_file_downloaded(raw_playlist_data, '/media/data/bima/lagu/Gamelan/Yogyakarta/')
     write_json_file(playlist_data)
-
