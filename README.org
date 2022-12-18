@@ -5,10 +5,11 @@
 The problem i am facing when listening to [[https://docs.google.com/spreadsheets/d/1R1IGG3ETEWHxhWxIuFCfkGwOZUy3W4syATL6RzQrURc/view][my gamelan playlist]], it is timestamp based playlist. That means i have to change the URL and timestamp manually whenever a song done. So i think it will be better if a could make a tools that can play this automatically.
 
 * Usage
-Before using this tool you have to specify the download directory and sheet URL.
+Before using this tool you have to specify the download directory and API_KEY. Make sure that you enables *Google Sheets API* in your API key. Add your google API Key in [[file:src/google_sheet.py::API_KEY = "YOUR_API_KEY"][src/google_sheet.py]]
 
 #+begin_src python
-python playlist_manager.py command
+python playlist_manager.py update
+python playlist_manager.py sync
 #+end_src
 
 There are 2 available commands
